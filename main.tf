@@ -22,7 +22,7 @@ resource "aws_security_group" "security_group" {
 # see (https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9)
 #
 
-resource "aws_security_group_rule" "cidr_ingress_rule" {
+resource "aws_security_group_rule" "cidr_ipv4_ingress_rule" {
   provider = "aws.module"
   type = "ingress"
 
@@ -43,7 +43,7 @@ resource "aws_security_group_rule" "cidr_ingress_rule" {
 # Egress-Rules.
 # see (https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9)
 #
-resource "aws_security_group_rule" "cidr_egress_rule" {
+resource "aws_security_group_rule" "cidr_ipv4_egress_rule" {
   provider = "aws.module"
   type = "egress"
 
