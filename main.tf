@@ -3,7 +3,7 @@ provider "aws" {
   region = "${var.provider_region}"
   profile = "${var.profile}"
   assume_role {
-    role_arn = "${var.cross_dev_ops_role_arn}"
+    role_arn = "${var.assume_role_arn}"
   }
 }
 
@@ -26,16 +26,16 @@ resource "aws_security_group_rule" "cidr_ingress_rule" {
   provider = "aws.module"
   type = "ingress"
 
-  count = "${var.cidr_ingress_rules_count}"
+  count = "${var.cidr_ipv4_ingress_rules_count}"
   security_group_id = "${aws_security_group.security_group.id}"
 
-  from_port = "${element(split("~~~", var.cidr_ingress_rules["ports"]), count.index)}"
-  to_port = "${element(split("~~~", var.cidr_ingress_rules["ports"]), count.index)}"
-  protocol = "${element(split("~~~", var.cidr_ingress_rules["protocols"]), count.index)}"
+  from_port = "${element(split("~~~", var.cidr_ipv4_ingress_rules["ports"]), count.index)}"
+  to_port = "${element(split("~~~", var.cidr_ipv4_ingress_rules["ports"]), count.index)}"
+  protocol = "${element(split("~~~", var.cidr_ipv4_ingress_rules["protocols"]), count.index)}"
 
-  cidr_blocks = "${split(",", element(split("~~~", var.cidr_ingress_rules["cidr_blocks"]), count.index))}"
+  cidr_blocks = "${split(",", element(split("~~~", var.cidr_ipv4_ingress_rules["cidr_blocks"]), count.index))}"
 
-  description = "${element(split(",", element(split("~~~", var.cidr_ingress_rules["descriptions"]), count.index)), count.index)}"
+  description = "${element(split(",", element(split("~~~", var.cidr_ipv4_ingress_rules["descriptions"]), count.index)), count.index)}"
 }
 
 #
@@ -47,16 +47,16 @@ resource "aws_security_group_rule" "cidr_egress_rule" {
   provider = "aws.module"
   type = "egress"
 
-  count = "${var.cidr_egress_rules_count}"
+  count = "${var.cidr_ipv4_egress_rules_count}"
   security_group_id = "${aws_security_group.security_group.id}"
 
-  from_port = "${element(split("~~~", var.cidr_egress_rules["ports"]), count.index)}"
-  to_port = "${element(split("~~~", var.cidr_egress_rules["ports"]), count.index)}"
-  protocol = "${element(split("~~~", var.cidr_egress_rules["protocols"]), count.index)}"
+  from_port = "${element(split("~~~", var.cidr_ipv4_egress_rules["ports"]), count.index)}"
+  to_port = "${element(split("~~~", var.cidr_ipv4_egress_rules["ports"]), count.index)}"
+  protocol = "${element(split("~~~", var.cidr_ipv4_egress_rules["protocols"]), count.index)}"
 
-  cidr_blocks = "${split(",", element(split("~~~", var.cidr_egress_rules["cidr_blocks"]), count.index))}"
+  cidr_blocks = "${split(",", element(split("~~~", var.cidr_ipv4_egress_rules["cidr_blocks"]), count.index))}"
 
-  description = "${element(split(",", element(split("~~~", var.cidr_egress_rules["descriptions"]), count.index)), count.index)}"
+  description = "${element(split(",", element(split("~~~", var.cidr_ipv4_egress_rules["descriptions"]), count.index)), count.index)}"
 }
 
 ##### IPv6 #####

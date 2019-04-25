@@ -1,6 +1,6 @@
 # Basic Variables
 variable "profile" {
-  default = "the AWS profile to use"
+  description = "the AWS profile to use"
 }
 
 variable "vpc_id" {
@@ -9,7 +9,6 @@ variable "vpc_id" {
 
 variable "description" {
   description = "The description of the security group"
-  default = "Basic http Security-Group"
 }
 
 variable "name" {
@@ -22,7 +21,7 @@ variable "custom_tags" {
 }
 
 # Variables for IPv4 cidr_based rules
-variable "cidr_ingress_rules" {
+variable "cidr_ipv4_ingress_rules" {
   description = "Ports to be allowed for ingress connections based on cidr-blocks. The needed values are protocols, cidr_blocks, ports"
   type = "map"
   default = {
@@ -33,13 +32,13 @@ variable "cidr_ingress_rules" {
   }
 }
 
-variable "cidr_ingress_rules_count" {
+variable "cidr_ipv4_ingress_rules_count" {
   description = "Amount of ingress rules. Has to be equal to the amount of ports given in variable cidr_ingress_rules"
   default = 0
 }
 
 
-variable "cidr_egress_rules" {
+variable "cidr_ipv4_egress_rules" {
   description = "Ports to be allowed for egress connections based on cidr-blocks. The needed values are protocols, cidr_blocks, ports"
   type = "map"
   default = {
@@ -50,7 +49,7 @@ variable "cidr_egress_rules" {
   }
 }
 
-variable "cidr_egress_rules_count" {
+variable "cidr_ipv4_egress_rules_count" {
   description = "Amount of egress rules. Has to be equal to the amount of ports given in variable <cidr_egress_rules>"
   default = 1
 }
@@ -133,7 +132,7 @@ variable "source_security_group" {
   default = ""
 }
 
-variable "cross_dev_ops_role_arn" {
+variable "assume_role_arn" {
   description = "ARN of the role to use"
 }
 
