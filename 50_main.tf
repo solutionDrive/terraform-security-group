@@ -59,11 +59,6 @@ resource "aws_security_group_rule" "cidr_ipv6_ingress_rule" {
   description = element(split(",", var.cidr_ipv6_ingress_rules["descriptions"][each.key]))
 }
 
-#
-# Iterates over all given ipv6 egress rules and uses some build-in terraform functionality to create all
-# Egress-Rules.
-# see (https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9)
-#
 resource "aws_security_group_rule" "cidr_ipv6_egress_rule" {
   provider = "aws.module"
   type = "egress"
@@ -82,11 +77,6 @@ resource "aws_security_group_rule" "cidr_ipv6_egress_rule" {
 }
 
 ##### SecurityGroups #####
-#
-# Iterates over all given ingress rules and uses some build-in terraform functionality to create all
-# Ingress-Rules.
-# see (https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9)
-#
 resource "aws_security_group_rule" "sg_ingress_rule" {
   provider = "aws.module"
   type = "ingress"
@@ -104,11 +94,6 @@ resource "aws_security_group_rule" "sg_ingress_rule" {
   description = element(split(",", var.security_group_ingress_rules["descriptions"][each.key]))
 }
 
-#
-# Iterates over all given egress rules and uses some build-in terraform functionality to create all
-# Egress-Rules.
-# see (https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9)
-#
 resource "aws_security_group_rule" "sg_egress_rule" {
   provider = "aws.module"
   type = "egress"
