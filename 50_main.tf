@@ -1,12 +1,3 @@
-provider "aws" {
-  alias = "module"
-  region = "${var.provider_region}"
-  profile = "${var.profile}"
-  assume_role {
-    role_arn = "${var.assume_role_arn}"
-  }
-}
-
 resource "aws_security_group" "security_group" {
   provider = "aws.module"
   name = "${var.name}"
