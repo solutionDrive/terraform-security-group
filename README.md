@@ -49,7 +49,7 @@ module "security_group_webserver" {
     security_group_ingress_rules_count = 1 # This count has to equal the amount of Ports defined in <security_group_ingress_rules>
     
     provider_region = "${var.default_region}"
-    account_id = "${var.oxid_dev_account_id}" # to be able to assume Roles from a specific account
+    # assume_role_arn = arn:aws:iam::123456789012:role/AnotherRole # Assume 'AnotherRole' to create security group
 }
 ```
 

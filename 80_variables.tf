@@ -134,8 +134,12 @@ variable "source_security_group" {
 
 variable "assume_role_arn" {
   description = "ARN of the role to use"
+  default = ""
 }
 
 variable "provider_region" {}
 
-variable "account_id" {}
+variable "account_id" {
+  description = "Account id (deprecated | please use the 'assume_role_arn' variable)"
+  default = ""
+}
