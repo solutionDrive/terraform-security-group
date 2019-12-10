@@ -20,6 +20,18 @@ variable "custom_tags" {
   default = {}
 }
 
+variable "assume_role_arn" {
+  description = "ARN of the role to use"
+  default = ""
+}
+
+variable "provider_region" {}
+
+variable "account_id" {
+  description = "Account id (deprecated | please use the 'assume_role_arn' variable)"
+  default = ""
+}
+
 # Variables for IPv4 cidr_based rules
 variable "cidr_ipv4_ingress_rules" {
   description = "Ports to be allowed for ingress connections based on cidr-blocks. The needed values are protocols, cidr_blocks, ports"
@@ -32,12 +44,6 @@ variable "cidr_ipv4_ingress_rules" {
   }
 }
 
-variable "cidr_ipv4_ingress_rules_count" {
-  description = "Amount of ingress rules. Has to be equal to the amount of ports given in variable cidr_ingress_rules"
-  default = 0
-}
-
-
 variable "cidr_ipv4_egress_rules" {
   description = "Ports to be allowed for egress connections based on cidr-blocks. The needed values are protocols, cidr_blocks, ports"
   type = "map"
@@ -47,11 +53,6 @@ variable "cidr_ipv4_egress_rules" {
     "cidr_blocks" = "0.0.0.0/0"
     "descriptions" = ""
   }
-}
-
-variable "cidr_ipv4_egress_rules_count" {
-  description = "Amount of egress rules. Has to be equal to the amount of ports given in variable <cidr_egress_rules>"
-  default = 1
 }
 
 # Variables for IPv6 cidr_based rules
@@ -66,12 +67,6 @@ variable "cidr_ipv6_ingress_rules" {
   }
 }
 
-variable "cidr_ipv6_ingress_rules_count" {
-  description = "Amount of ipv6 based ingress rules. Has to be equal to the amount of ports given in variable cidr_ipv6_ingress_rules"
-  default = 0
-}
-
-
 variable "cidr_ipv6_egress_rules" {
   description = "Ports to be allowed for egress ipv6 connections based on cidr-blocks. The needed values are protocols, ipv6_cidr_blocks, ports"
   type = "map"
@@ -81,11 +76,6 @@ variable "cidr_ipv6_egress_rules" {
     "ipv6_cidr_blocks" = "::/0"
     "descriptions" = ""
   }
-}
-
-variable "cidr_ipv6_egress_rules_count" {
-  description = "Amount of ipv6 based egress rules. Has to be equal to the amount of ports given in variable cidr_ipv6_egress_rules"
-  default = 1
 }
 
 # Variables for security_group based rules
@@ -104,11 +94,6 @@ variable "security_group_ingress_rules" {
   }
 }
 
-variable "security_group_ingress_rules_count" {
-  description = "Amount of sg_based ingress rules. Has to be equal to the amount of ports given in variable security_group_ingress_rules"
-  default = 0
-}
-
 variable "security_group_egress_rules" {
   description = "Ports to be allowed for egress connections based on security_groups. The needed values are protocols, source_security_groups, ports"
   type = "map"
@@ -122,24 +107,7 @@ variable "security_group_egress_rules" {
   }
 }
 
-variable "security_group_egress_rules_count" {
-  description = "Amount of sg_based egress rules. Has to be equal to the amount of ports given in variable security_group_egress_rules"
-  default = 0
-}
-
 variable "source_security_group" {
   description = "The security group to/from which the access should be granted"
-  default = ""
-}
-
-variable "assume_role_arn" {
-  description = "ARN of the role to use"
-  default = ""
-}
-
-variable "provider_region" {}
-
-variable "account_id" {
-  description = "Account id (deprecated | please use the 'assume_role_arn' variable)"
   default = ""
 }
