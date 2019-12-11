@@ -20,7 +20,7 @@ resource "aws_security_group_rule" "cidr_ipv4_ingress_rule" {
   to_port = var.cidr_ipv4_ingress_rules["ports"][each.key]
   protocol = var.cidr_ipv4_ingress_rules["protocols"][each.key]
 
-  cidr_blocks = element(split(",", var.cidr_ipv4_ingress_rules["cidr_blocks"][each.key]))
+  cidr_blocks = split(",", var.cidr_ipv4_ingress_rules["cidr_blocks"][each.key])
 
   description = element(split(",", var.cidr_ipv4_ingress_rules["descriptions"][each.key]))
 }
@@ -37,7 +37,7 @@ resource "aws_security_group_rule" "cidr_ipv4_egress_rule" {
   to_port = var.cidr_ipv4_egress_rules["ports"][each.key]
   protocol = var.cidr_ipv4_egress_rules["protocols"][each.key]
 
-  cidr_blocks = element(split(",", var.cidr_ipv4_egress_rules["cidr_blocks"][each.key]))
+  cidr_blocks = split(",", var.cidr_ipv4_egress_rules["cidr_blocks"][each.key])
 
   description = element(split(",", var.cidr_ipv4_egress_rules["descriptions"][each.key]))
 }
@@ -55,7 +55,7 @@ resource "aws_security_group_rule" "cidr_ipv6_ingress_rule" {
   to_port = var.cidr_ipv6_ingress_rules["ports"][each.key]
   protocol = var.cidr_ipv6_ingress_rules["protocols"][each.key]
 
-  ipv6_cidr_blocks = element(split(",", var.cidr_ipv6_ingress_rules["ipv6_cidr_blocks"][each.key]))
+  ipv6_cidr_blocks = split(",", var.cidr_ipv6_ingress_rules["ipv6_cidr_blocks"][each.key])
 
   description = element(split(",", var.cidr_ipv6_ingress_rules["descriptions"][each.key]))
 }
@@ -72,7 +72,7 @@ resource "aws_security_group_rule" "cidr_ipv6_egress_rule" {
   to_port = var.cidr_ipv6_egress_rules["ports"][each.key]
   protocol = var.cidr_ipv6_egress_rules["protocols"][each.key]
 
-  ipv6_cidr_blocks = element(split(",", var.cidr_ipv6_egress_rules["ipv6_cidr_blocks"][each.key]))
+  ipv6_cidr_blocks = split(",", var.cidr_ipv6_egress_rules["ipv6_cidr_blocks"][each.key])
 
   description = element(split(",", var.cidr_ipv6_egress_rules["descriptions"][each.key]))
 }
