@@ -1,3 +1,4 @@
+##### Main Security Group #####
 resource "aws_security_group" "security_group" {
   provider = "aws.module"
   name = var.name
