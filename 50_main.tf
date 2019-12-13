@@ -18,8 +18,8 @@ resource "aws_security_group_rule" "cidr_ipv4_ingress_rule" {
   security_group_id = aws_security_group.security_group.id
 
   from_port = each.value
-  to_port = var.cidr_ipv4_ingress_rules["ports"][each.key]
-  protocol = var.cidr_ipv4_ingress_rules["protocols"][each.key]
+  to_port = split("~~~", var.cidr_ipv4_ingress_rules["ports"])[each.key]
+  protocol = split("~~~", var.cidr_ipv4_ingress_rules["protocols"])[each.key]
 
   dynamic "cidr_blocks" {
     for_each = split(",", var.cidr_ipv4_ingress_rules["cidr_blocks"][each.key])
@@ -40,8 +40,8 @@ resource "aws_security_group_rule" "cidr_ipv4_egress_rule" {
   security_group_id = aws_security_group.security_group.id
 
   from_port = each.value
-  to_port = var.cidr_ipv4_egress_rules["ports"][each.key]
-  protocol = var.cidr_ipv4_egress_rules["protocols"][each.key]
+  to_port = split("~~~", var.cidr_ipv4_egress_rules["ports"])[each.key]
+  protocol = split("~~~", var.cidr_ipv4_egress_rules["protocols"])[each.key]
 
   dynamic "cidr_blocks" {
     for_each = split(",", var.cidr_ipv4_egress_rules["cidr_blocks"][each.key])
@@ -63,8 +63,8 @@ resource "aws_security_group_rule" "cidr_ipv6_ingress_rule" {
   security_group_id = aws_security_group.security_group.id
 
   from_port = each.value
-  to_port = var.cidr_ipv6_ingress_rules["ports"][each.key]
-  protocol = var.cidr_ipv6_ingress_rules["protocols"][each.key]
+  to_port = split("~~~", var.cidr_ipv6_ingress_rules["ports"])[each.key]
+  protocol = split("~~~", var.cidr_ipv6_ingress_rules["protocols"])[each.key]
 
   dynamic "ipv6_cidr_blocks" {
     for_each = split(",", var.cidr_ipv6_ingress_rules["cidr_blocks"][each.key])
@@ -85,8 +85,8 @@ resource "aws_security_group_rule" "cidr_ipv6_egress_rule" {
   security_group_id = aws_security_group.security_group.id
 
   from_port = each.value
-  to_port = var.cidr_ipv6_egress_rules["ports"][each.key]
-  protocol = var.cidr_ipv6_egress_rules["protocols"][each.key]
+  to_port = split("~~~", var.cidr_ipv6_egress_rules["ports"])[each.key]
+  protocol = split("~~~", var.cidr_ipv6_egress_rules["protocols"])[each.key]
 
   dynamic "ipv6_cidr_blocks" {
     for_each = split(",", var.cidr_ipv6_egress_rules["cidr_blocks"][each.key])
@@ -108,8 +108,8 @@ resource "aws_security_group_rule" "sg_ingress_rule" {
   security_group_id = aws_security_group.security_group.id
 
   from_port = each.value
-  to_port = var.security_group_ingress_rules["ports"][each.key]
-  protocol = var.security_group_ingress_rules["protocols"][each.key]
+  to_port = split("~~~", var.security_group_ingress_rules["ports"])[each.key]
+  protocol = split("~~~", var.security_group_ingress_rules["protocols"])[each.key]
 
   source_security_group_id = var.security_group_ingress_rules["source_security_groups"][each.key] == "self" ? aws_security_group.security_group.id : var.security_group_ingress_rules["source_security_groups"][each.key]
 
@@ -125,8 +125,8 @@ resource "aws_security_group_rule" "sg_egress_rule" {
   security_group_id = aws_security_group.security_group.id
 
   from_port = each.value
-  to_port = var.security_group_egress_rules["ports"][each.key]
-  protocol = var.security_group_egress_rules["protocols"][each.key]
+  to_port = split("~~~", var.security_group_egress_rules["ports"])[each.key]
+  protocol = split("~~~", var.security_group_egress_rules["protocols"])[each.key]
 
   source_security_group_id = var.security_group_egress_rules["source_security_groups"][each.key] == "self" ? aws_security_group.security_group.id : var.security_group_egress_rules["source_security_groups"][each.key]
 
