@@ -16,7 +16,7 @@ variable "name" {
 }
 
 variable "custom_tags" {
-  type = "map"
+  type = map(string)
   default = {}
 }
 
@@ -35,7 +35,7 @@ variable "account_id" {
 # Variables for IPv4 cidr_based rules
 variable "cidr_ipv4_ingress_rules" {
   description = "Ports to be allowed for ingress connections based on cidr-blocks. The needed values are protocols, cidr_blocks, ports"
-  type = "map"
+  type = map(string)
   default = {
     "protocols" = "tcp",
     "ports" = "",
@@ -46,7 +46,7 @@ variable "cidr_ipv4_ingress_rules" {
 
 variable "cidr_ipv4_egress_rules" {
   description = "Ports to be allowed for egress connections based on cidr-blocks. The needed values are protocols, cidr_blocks, ports"
-  type = "map"
+  type = map(string)
   default = {
     "protocols" = "-1",
     "ports" = "0"
@@ -58,7 +58,7 @@ variable "cidr_ipv4_egress_rules" {
 # Variables for IPv6 cidr_based rules
 variable "cidr_ipv6_ingress_rules" {
   description = "Ports to be allowed for ingress ipv6 connections based on cidr-blocks. The needed values are protocols, ipv6_cidr_blocks, ports"
-  type = "map"
+  type = map(string)
   default = {
     "protocols" = "tcp",
     "ports" = "",
@@ -69,7 +69,7 @@ variable "cidr_ipv6_ingress_rules" {
 
 variable "cidr_ipv6_egress_rules" {
   description = "Ports to be allowed for egress ipv6 connections based on cidr-blocks. The needed values are protocols, ipv6_cidr_blocks, ports"
-  type = "map"
+  type = map(string)
   default = {
     "protocols" = "-1"
     "ports" = "0"
@@ -81,11 +81,7 @@ variable "cidr_ipv6_egress_rules" {
 # Variables for security_group based rules
 variable "security_group_ingress_rules" {
   description = "Ports to be allowed for ingress connections based on security_groups. The needed values are protocols, source_security_groups, ports"
-  type = "map"
-  # default value is only for demonstration purpose. This variable should be given in to the module, for security_reasons
-  #default = {
-  #  "protocols" = "tcp", "source_security_groups" = "id_of_group_for_first_port, id_of_group_for_second_group", ports = "80,443"
-  #}
+  type = map(string)
   default = {
     "protocols" = "tcp",
     "ports" = "",
@@ -96,9 +92,7 @@ variable "security_group_ingress_rules" {
 
 variable "security_group_egress_rules" {
   description = "Ports to be allowed for egress connections based on security_groups. The needed values are protocols, source_security_groups, ports"
-  type = "map"
-  # default value is only for demonstration purpose. This variable should be given in to the module, for security_reasons
-  #default = {"protocols" = "tcp", "source_security_groups" = "id_of_group_for_first_port, id_of_group_for_second_group", ports = "80,443"}
+  type = map(string)
   default = {
     "protocols" = "tcp",
     "ports" = "",

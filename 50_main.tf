@@ -1,6 +1,7 @@
 ##### Main Security Group #####
 resource "aws_security_group" "security_group" {
-  provider = "aws.module"
+  provider = aws.module
+
   name = var.name
   description = var.description
   vpc_id = var.vpc_id
@@ -9,7 +10,7 @@ resource "aws_security_group" "security_group" {
 
 ##### IPv4 #####
 resource "aws_security_group_rule" "cidr_ipv4_ingress_rule" {
-  provider = "aws.module"
+  provider = aws.module
   type = "ingress"
 
   for_each = split("~~~", var.cidr_ipv4_ingress_rules["ports"])
@@ -31,7 +32,7 @@ resource "aws_security_group_rule" "cidr_ipv4_ingress_rule" {
 }
 
 resource "aws_security_group_rule" "cidr_ipv4_egress_rule" {
-  provider = "aws.module"
+  provider = aws.module
   type = "egress"
 
   for_each = split("~~~", var.cidr_ipv4_egress_rules["ports"])
@@ -54,7 +55,7 @@ resource "aws_security_group_rule" "cidr_ipv4_egress_rule" {
 
 ##### IPv6 #####
 resource "aws_security_group_rule" "cidr_ipv6_ingress_rule" {
-  provider = "aws.module"
+  provider = aws.module
   type = "ingress"
 
   for_each = split("~~~", var.cidr_ipv6_ingress_rules["ports"])
@@ -76,7 +77,7 @@ resource "aws_security_group_rule" "cidr_ipv6_ingress_rule" {
 }
 
 resource "aws_security_group_rule" "cidr_ipv6_egress_rule" {
-  provider = "aws.module"
+  provider = aws.module
   type = "egress"
 
   for_each = split("~~~", var.cidr_ipv6_egress_rules["ports"])
@@ -99,7 +100,7 @@ resource "aws_security_group_rule" "cidr_ipv6_egress_rule" {
 
 ##### SecurityGroups #####
 resource "aws_security_group_rule" "sg_ingress_rule" {
-  provider = "aws.module"
+  provider = aws.module
   type = "ingress"
 
   for_each = split("~~~", var.security_group_ingress_rules["ports"])
@@ -116,7 +117,7 @@ resource "aws_security_group_rule" "sg_ingress_rule" {
 }
 
 resource "aws_security_group_rule" "sg_egress_rule" {
-  provider = "aws.module"
+  provider = aws.module
   type = "egress"
 
   for_each = split("~~~", var.security_group_egress_rules["ports"])
