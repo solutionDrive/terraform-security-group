@@ -21,12 +21,12 @@ resource "aws_security_group_rule" "cidr_ipv4_ingress_rule" {
   to_port = var.cidr_ipv4_ingress_rules["ports"][each.key]
   protocol = var.cidr_ipv4_ingress_rules["protocols"][each.key]
 
-  dynamic "cidr_block" {
+  dynamic "cidr_blocks" {
     for_each = split(",", var.cidr_ipv4_ingress_rules["cidr_blocks"][each.key])
     content {
-      cidr_blocks = cidr_block.value
+      cidr_blocks = cidr_blocks.value
 
-      description = element(split(",", var.cidr_ipv4_ingress_rules["descriptions"][each.key]), cidr_block.key)
+      description = element(split(",", var.cidr_ipv4_ingress_rules["descriptions"][each.key]), cidr_blocks.key)
     }
   }
 }
@@ -43,12 +43,12 @@ resource "aws_security_group_rule" "cidr_ipv4_egress_rule" {
   to_port = var.cidr_ipv4_egress_rules["ports"][each.key]
   protocol = var.cidr_ipv4_egress_rules["protocols"][each.key]
 
-  dynamic "cidr_block" {
+  dynamic "cidr_blocks" {
     for_each = split(",", var.cidr_ipv4_egress_rules["cidr_blocks"][each.key])
     content {
-      cidr_blocks = cidr_block.value
+      cidr_blocks = cidr_blocks.value
 
-      description = element(split(",", var.cidr_ipv4_egress_rules["descriptions"][each.key]), cidr_block.key)
+      description = element(split(",", var.cidr_ipv4_egress_rules["descriptions"][each.key]), cidr_blocks.key)
     }
   }
 }
@@ -66,12 +66,12 @@ resource "aws_security_group_rule" "cidr_ipv6_ingress_rule" {
   to_port = var.cidr_ipv6_ingress_rules["ports"][each.key]
   protocol = var.cidr_ipv6_ingress_rules["protocols"][each.key]
 
-  dynamic "cidr_block" {
+  dynamic "ipv6_cidr_blocks" {
     for_each = split(",", var.cidr_ipv6_ingress_rules["cidr_blocks"][each.key])
     content {
-      ipv6_cidr_blocks = cidr_block.value
+      ipv6_cidr_blocks = ipv6_cidr_blocks.value
 
-      description = element(split(",", var.cidr_ipv6_ingress_rules["descriptions"][each.key]), cidr_block.key)
+      description = element(split(",", var.cidr_ipv6_ingress_rules["descriptions"][each.key]), ipv6_cidr_blocks.key)
     }
   }
 }
@@ -88,12 +88,12 @@ resource "aws_security_group_rule" "cidr_ipv6_egress_rule" {
   to_port = var.cidr_ipv6_egress_rules["ports"][each.key]
   protocol = var.cidr_ipv6_egress_rules["protocols"][each.key]
 
-  dynamic "cidr_block" {
+  dynamic "ipv6_cidr_blocks" {
     for_each = split(",", var.cidr_ipv6_egress_rules["cidr_blocks"][each.key])
     content {
-      ipv6_cidr_blocks = cidr_block.value
+      ipv6_cidr_blocks = ipv6_cidr_blocks.value
 
-      description = element(split(",", var.cidr_ipv6_egress_rules["descriptions"][each.key]), cidr_block.key)
+      description = element(split(",", var.cidr_ipv6_egress_rules["descriptions"][each.key]), ipv6_cidr_blocks.key)
     }
   }
 }
